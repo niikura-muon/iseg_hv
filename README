@@ -1,0 +1,63 @@
+iSeg HV Controller
+
+A simple web-based controller for iSeg NHQ high voltage power supplies using Python, Streamlit, and RS-232 communication.
+
+Features
+
+* 4-channel HV control
+* Set voltage for each channel
+* Adjustable ramp speed
+* Apply all settings at once
+* Shutdown all channels safely
+* Live voltage and current readout
+* Simple web UI via Streamlit
+
+Requirements
+
+* Python 3.10+
+* Linux (tested on Ubuntu MATE 22.04)
+* RS-232 connection to iSeg NHQ module
+
+Python packages:
+
+* streamlit
+* pyserial
+
+Installation
+
+```
+git clone git@github.com:niikura-muon/iseg_hv.git
+cd iseg_hv
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+Usage
+
+Run the Streamlit app:
+ 
+```
+streamlit run iseg_web.py
+```
+
+Then open the local web interface in your browser.
+
+Notes
+
+Serial ports are currently configured as:
+
+* /dev/ttyUSB0
+* /dev/ttyUSB1
+
+You may need to modify these depending on your hardware setup.
+
+Make sure your user belongs to the dialout group:
+
+sudo usermod -aG dialout $USER
+
+Disclaimer
+
+This software controls high-voltage hardware.
+
+Use at your own risk. Always verify output settings and follow proper laboratory safety procedures.
