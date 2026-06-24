@@ -22,16 +22,32 @@ class NHQ:
         return resp
 
 
-hv1 = NHQ('/dev/ttyUSB0')
-hv2 = NHQ('/dev/ttyUSB1')
-
-# print(hv1.send("#"))
-# print(hv2.send("U1"))
-
 # ======== Streamlit UI ========
 import streamlit as st
 
+st.set_page_config(page_title="iSeg HV control")
 st.title("iSeg NHQ HV control")
+
+
+def init_hv(port):
+    try:
+        return NHQ(port)
+    except serial.SerialException:
+        return None
+
+
+hv1 = init_hv('/dev/ttyUSB0')
+hv2 = init_hv('/dev/ttyUSB1')
+
+if hv1 is None:
+    st.info("USB0が接続されていません")
+if hv2 is None:
+    st.info("USB1が接続されていません")
+if hv1 is None or hv2 is None:
+    st.stop()
+
+# print(hv1.send("#"))
+# print(hv2.send("U1"))
 
 def apply_all():
     for title, hv, ch in PANELS:
